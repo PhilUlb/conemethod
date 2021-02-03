@@ -6,12 +6,31 @@ cd(pwd)
 addpath(genpath(pwd))
 
 
+%% Data merging
+% To comply with Github's file size restrictions, the data for Experiment 1
+% had to be split in two parts, which are merged here.
+
+load('Exp1_data1.mat');
+load('Exp1_data2.mat');
+
+trial_data = vertcat(trial_data1,trial_data2);
+hand_data  = vertcat(hand_data1,hand_data2);
+
+save('Exp1_data.mat','trial_data','hand_data');
+
+
 %% Experiment 1 analyses and figures
 
-% Run only once (results are automatically stored)
+% Only needs to be run once (results will be stored).
+% Results that are needed for the scripts below are already stored in
+% Exp1_data.mat.
 Exp1_apply_cone_method
 Exp1_apply_CP_test
-Exp1_actual_adjustment_angle_estimation % includes Supplementary Figure 3-1 & 3-2
+
+% Includes Supplementary Figures 3-1 & 3-2; estimated actual adjustment
+% angles already included in Exp1_data.mat (i.e. only needs to be run for
+% the figure)
+Exp1_actual_adjustment_angle_estimation
 
 % Run each time
 Exp1_Figure1D

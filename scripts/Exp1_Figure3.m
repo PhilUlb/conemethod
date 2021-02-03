@@ -233,11 +233,12 @@ hand_data.hpos_xy_2D_4      = hand_data.hpos_xyz(:,3);
 hand_data.hpos_xy_2D_4(:,2) = hand_data.hpos_xyz(:,2);
 hand_data.hpos_xy_2D_4(:,1) = cellfun(@(x) -x,hand_data.hpos_xy_2D_4(:,1),'uni',0);
 
+
 clear g
 figure('Units','centimeters','Position',[0 0 10 10])
 g = gramm('x',hand_data.hpos_xy_2D_4(:,1),'y',hand_data.hpos_xy_2D_4(:,2),'color',trial_data.target_directionUD);
 g.set_layout_options('legend_position',[0.2 0.825 0.2 0.2]);
-g.stat_summary('type','sem','geom','line','interp_in',200);
+g.stat_summary('type','sem','geom','line');
 g.geom_hline('yintercept',0);
 g.axe_property('DataAspectRatio',[2 1 2],'YLim',[-10 10],'XLim',[0 120],'XTick',0:60:180,'YTick',[-20 -10 0 10]);
 g.facet_grid(trial_data.start_via_dist,[]);

@@ -46,6 +46,7 @@ CP_data.pval            = cell(height(CP_data),1);
 CP_data.sig_onset       = nan(height(CP_data),1);
 CP_data.poc_cp_interp   = nan(height(CP_data),1);
 
+
 for i = 1:height(CP_data)
     sel = trial_data.subject_index==CP_data.subject_index(i)...
         & trial_data.soa==CP_data.soa(i)...
@@ -96,7 +97,10 @@ for i = 1:height(CP_data)
         trial_data.poc_cp_interp(sel) = nan;
     end
 end
+    
 
+
+%%
 
 % Find the the hand position in the original (i.e. non-interpolated) trajectories closest to the POC CP
 [~,aux_i] = cellfun(@(x,p) min(abs(x-p)),hand_data.hpos(:,2),num2cell(trial_data.poc_cp_interp),'uni',0);
@@ -110,6 +114,7 @@ trial_data.poc_cp_orig(isnan(trial_data.poc_cp_interp)) = nan;
 trial_data.toc_cp_orig(isnan(trial_data.poc_cp_interp)) = nan;
 
 trial_data.toc_cp_orig_rel2gocue = trial_data.toc_cp_orig + trial_data.reaction_time;
+
 
 %% Store the results
 
