@@ -6,6 +6,19 @@ cd(pwd)
 addpath(genpath(pwd))
 
 
+%% Data merging
+% To comply with Github's file size restrictions, the data for Experiment 1
+% had to be split in two parts, which are merged here.
+
+load('Exp1_data1.mat');
+load('Exp1_data2.mat');
+
+trial_data = vertcat(trial_data1,trial_data2);
+hand_data  = vertcat(hand_data1,hand_data2);
+
+save('Exp1_data.mat','trial_data','hand_data');
+
+
 %% Experiment 1 analyses and figures
 
 % Only needs to be run once (results will be stored).

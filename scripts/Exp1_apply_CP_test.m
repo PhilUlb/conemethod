@@ -68,6 +68,14 @@ for i = 1:height(CP_data)
         CP_data.sig_onset(i) = aux;
     end
     
+    % When the lateral deviation is significant from the first datapoint
+    % onward, the code above erroneously determines no significance onset
+    % at all
+    aux = mean(CP_data.is_sig{i}==1)==1;
+    if aux
+        CP_data.sig_onset(i) = 1;
+    end
+    
     % Translate the CP test significance onset into the POC CP
     CP_data.poc_cp_interp(i)      = xq(CP_data.sig_onset(i));
     trial_data.poc_cp_interp(sel) = CP_data.poc_cp_interp(i);

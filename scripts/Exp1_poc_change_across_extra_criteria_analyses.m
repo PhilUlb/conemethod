@@ -128,7 +128,8 @@ clear g
 figure('Units','centimeters','Position',[0 0 28 18])
 
 % 1-2 A, gray bars (proportion trials per bin)
-g(1) = gramm('x',trial_data3.adjustment_angle_actual_bin_fixedEdge,'y',trial_data3.p_all_S*4);
+g(1) = gramm('x',trial_data3.adjustment_angle_actual_bin_fixedEdge,'y',trial_data3.p_all_S*4,...
+    'subset',trial_data3.adjustment_angle_actual_bin_fixedEdge<90);
 g(1).set_layout_options('position',[0 0.5 0.725 0.5]);
 g(1).stat_summary('type','sem','geom','bar','width',0.7);
 g(1).axe_property('XTick',0:10:90,'XTickLabelRotation',45,'YLim',[0 1],'YTick',[0 0.5 1]);
@@ -140,7 +141,8 @@ g(1).set_order_options('column',[1 4 2 3]);
 % 1-2 B
 g(2) = gramm('x',trial_data4.cone_comp,'y',trial_data4.p_affected);
 g(2).set_layout_options('position',[0.725 0.5 0.275 0.5]);
-g(2).stat_summary('type','bootci','geom',{'bar','black_errorbar'});
+g(2).stat_summary('type','bootci','geom','bar');
+g(2).stat_summary('type','bootci','geom','black_errorbar','width',1);
 g(2).axe_property('YLim',[0 1],'YTick',[0 0.5 1],'XLim',[0.7 4.3],'XTickLabelRotation',45);
 g(2).set_names('x','','y','Proportion of trials');
 g(2).set_color_options('map',[49,130,189]./255);
@@ -148,9 +150,9 @@ g(2).set_order_options('x',[1 4 2 3]);
 
 % 1-2 C
 g(3) = gramm('x',trial_data5.adjustment_angle_actual_bin_fixedEdge,'y',trial_data5.diff_POC_value,...
-    'color',trial_data5.diff_POC_type);
+    'color',trial_data5.diff_POC_type,'subset',trial_data5.adjustment_angle_actual_bin_fixedEdge<90);
 g(3).set_layout_options('position',[0 0 0.725 0.5],'legend_position',[0.575 0.1 0.15 0.15]);
-g(3).stat_summary('type','bootci','geom',{'line','point','errorbar'},'width',1,'setylim',1);
+g(3).stat_summary('type','bootci','geom',{'line','point','errorbar'},'width',1.7,'setylim',1);
 g(3).geom_hline('yintercept',0);
 g(3).axe_property('XTick',0:10:90,'XTickLabelRotation',45);
 g(3).facet_grid([],trial_data5.cone_comp);
@@ -161,7 +163,8 @@ g(3).set_order_options('column',[1 4 2 3],'color',-1);
 % 1-2 D
 g(4) = gramm('x',trial_data6.cone_comp,'y',trial_data6.mean_diff_POC_value,'color',trial_data6.diff_POC_type);
 g(4).set_layout_options('position',[0.725 0 0.275 0.5],'legend_position',[0.85 0.425 0.15 0.15]);
-g(4).stat_summary('type','bootci','geom',{'bar','black_errorbar'},'setylim',1);
+g(4).stat_summary('type','bootci','geom','bar','dodge',0.7,'setylim',1);
+g(4).stat_summary('type','bootci','geom','black_errorbar','width',1,'dodge',0.7,'setylim',1);
 g(4).axe_property('YLim',[0 50],'XLim',[0.7 4.3],'XTickLabelRotation',45);
 g(4).set_names('x','','y','Absolute POC change [mm]','color','');
 g(4).set_color_options('map',[230,85,13;49,130,189]./255);
@@ -173,18 +176,106 @@ g.set_stat_options('nboot',2000);
 g.draw();
 
 % 1-2 A, black bars (proportion affected trials per bin relative to total n trials)
-g(1).update('x',trial_data3.adjustment_angle_actual_bin_fixedEdge,'y',trial_data3.p_affected_S*4);
+g(1).update('x',trial_data3.adjustment_angle_actual_bin_fixedEdge,'y',trial_data3.p_affected_S*4,...
+    'subset',trial_data3.adjustment_angle_actual_bin_fixedEdge<90);
 g(1).stat_summary('type','sem','geom','bar','width',0.7);
 g(1).set_color_options('map',[0 0 0]);
 g(1).draw();
 
 % 1-2 A, line plot (proportion affected trials per bin relative to per-bin n trials)
-g(1).update('x',trial_data3.adjustment_angle_actual_bin_fixedEdge,'y',trial_data3.p_affected_SA);
-g(1).stat_summary('type','bootci','geom',{'line','point','errorbar'},'width',1);
+g(1).update('x',trial_data3.adjustment_angle_actual_bin_fixedEdge,'y',trial_data3.p_affected_SA,...
+    'subset',trial_data3.adjustment_angle_actual_bin_fixedEdge<90);
+g(1).stat_summary('type','bootci','geom',{'line','point','errorbar'},'width',1.7);
 g(1).set_color_options('map',[49,130,189]./255);
 g(1).draw();
 
 g.export('file_name','Figure_S1-2.pdf','file_type','pdf');
 
+
+%% Supplementary Figure 5-3
+
+trial_data3.subsample = cell(height(trial_data3),1);
+trial_data3.subsample(trial_data3.subject_index<9) = {'1 - 8'};
+trial_data3.subsample(trial_data3.subject_index>8) = {'9 - 16'};
+
+trial_data4.subsample = cell(height(trial_data4),1);
+trial_data4.subsample(trial_data4.subject_index<9) = {'1 - 8'};
+trial_data4.subsample(trial_data4.subject_index>8) = {'9 - 16'};
+
+trial_data5.subsample = cell(height(trial_data5),1);
+trial_data5.subsample(trial_data5.subject_index<9) = {'1 - 8'};
+trial_data5.subsample(trial_data5.subject_index>8) = {'9 - 16'};
+
+trial_data6.subsample = cell(height(trial_data6),1);
+trial_data6.subsample(trial_data6.subject_index<9) = {'1 - 8'};
+trial_data6.subsample(trial_data6.subject_index>8) = {'9 - 16'};
+
+
+cmap = [  0 144 240
+          0 114 189
+        233 112  61
+        217  83  25]./255;
+    
+cmap([2 4],:) = cmap([2 4],:)*0.8;
+    
+
+clear g
+figure('Units','centimeters','Position',[0 0 28 18])
+
+% 1-2 A, line plot (proportion affected trials per bin relative to per-bin n trials)
+g(1) = gramm('x',trial_data3.adjustment_angle_actual_bin_fixedEdge,'y',trial_data3.p_affected_SA,...
+    'lightness',trial_data3.subsample,'linestyle',trial_data3.subsample,...
+    'subset',trial_data3.adjustment_angle_actual_bin_fixedEdge<90);
+g(1).set_layout_options('position',[0 0.5 0.725 0.5]);
+g(1).stat_summary('type','bootci','geom',{'line','point','errorbar'},'width',1.7);
+g(1).axe_property('XTick',0:10:90,'XTickLabelRotation',45,'YLim',[0 1],'YTick',[0 0.5 1]);
+g(1).facet_grid([],trial_data3.cone_comp);
+g(1).set_names('x','Actual adjustment angle bin [°]','y','Proportion of trials','column','','row','','color','');
+g(1).set_color_options('map',cmap,'n_color',2,'n_lightness',2);
+g(1).set_order_options('column',[1 4 2 3]);
+g(1).no_legend();
+
+% 1-2 B
+g(2) = gramm('x',trial_data4.cone_comp,'y',trial_data4.p_affected,'lightness',trial_data4.subsample);
+g(2).set_layout_options('position',[0.725 0.5 0.275 0.5]);
+g(2).stat_summary('type','bootci','geom','bar','dodge',0.7);
+g(2).stat_summary('type','bootci','geom','black_errorbar','dodge',0.7,'width',1);
+g(2).axe_property('YLim',[0 1],'YTick',[0 0.5 1],'XLim',[0.5 4.5],'XTickLabelRotation',45);
+g(2).set_names('x','','y','Proportion of trials');
+g(2).set_color_options('map',cmap,'n_color',2,'n_lightness',2);
+g(2).set_order_options('x',[1 4 2 3]);
+g(2).no_legend();
+
+% 1-2 C
+g(3) = gramm('x',trial_data5.adjustment_angle_actual_bin_fixedEdge,'y',trial_data5.diff_POC_value,...
+    'color',trial_data5.diff_POC_type,'lightness',trial_data5.subsample,'linestyle',trial_data5.subsample,...
+    'subset',trial_data5.adjustment_angle_actual_bin_fixedEdge<90);
+g(3).set_layout_options('position',[0 0 0.725 0.5],'legend_position',[0.575 0.1 0.15 0.15]);
+g(3).stat_summary('type','bootci','geom',{'line','point','errorbar'},'width',1.7,'setylim',1);
+g(3).geom_hline('yintercept',0);
+g(3).axe_property('XTick',0:10:90,'XTickLabelRotation',45);
+g(3).facet_grid([],trial_data5.cone_comp);
+g(3).set_names('x','Actual adjustment angle bin [°]','y','POC change [mm]','color','','column','');
+g(3).set_color_options('map',cmap,'n_color',2,'n_lightness',2);
+g(3).set_order_options('column',[1 4 2 3],'color',-1);
+g(3).no_legend();
+
+% 1-2 D
+g(4) = gramm('x',trial_data6.cone_comp,'y',trial_data6.mean_diff_POC_value,'color',trial_data6.diff_POC_type,...
+    'lightness',trial_data6.subsample);
+g(4).set_layout_options('position',[0.725 0 0.275 0.5],'legend_position',[0.4 0.05 0.2 0.4]);
+g(4).stat_summary('type','bootci','geom','bar','dodge',0.7,'setylim',1);
+g(4).stat_summary('type','bootci','geom','black_errorbar','width',1,'dodge',0.7,'setylim',1);
+g(4).axe_property('YLim',[0 50],'XLim',[0.5 4.5],'XTickLabelRotation',45);
+g(4).set_names('x','','y','Absolute POC change [mm]','color','','lightness','subject');
+g(4).set_color_options('map',cmap,'n_color',2,'n_lightness',2,'legend','expand');
+g(4).set_order_options('x',[1 4 2 3],'color',-1);
+
+g.set_text_options('base_size',10,'label_scaling',1.4,'facet_scaling',1.4,'legend_scaling',1,'title_scaling',1);
+g.set_line_options('base_size',2);
+g.set_stat_options('nboot',2000);
+g.draw();
+
+g.export('file_name','Figure_S5-3.pdf','file_type','pdf');
 
 

@@ -32,8 +32,13 @@ for i = 1:length(selind) % Set up to plot multiple trials
     for j = 1:4
         switch j % Trajectory subplots. Plot POC at position...
             case 1 % halfway between start cutoff & POC ovs
-                cone_start = find(isnan(dirdiff{sel}(1:end-1)),1,'last');
-                ind = cone_start + ceil((td_subs.poc3D_vel-cone_start)/2);
+                
+                % In case cone start cutoff comes after trial start
+                % cone_start = find(isnan(dirdiff{sel}(1:end-1)),1,'last');
+                % ind = cone_start + ceil((td_subs.poc3D_vel-cone_start)/2);
+                
+                % In case cone start cutoff = trial start
+                ind = ceil(td_subs.poc3D_vel/2);
                 ind_t1 = ind;
             case 2 % POC ovs
                 ind = find(hd_subs.hpos_xy_2D_1{2}==td_subs.poc3D_ovs);
@@ -105,7 +110,8 @@ for i = 1:length(selind) % Set up to plot multiple trials
         
         % Speed
         v_xlim = [0 hd_subs.hpos_xy_2D_1{2}(end)+10];
-        v_ylim = [min(hd_subs.hspeed{:})-0.03 max(hd_subs.hspeed{:})+0.03];
+        %v_ylim = [min(hd_subs.hspeed{:})-0.03 max(hd_subs.hspeed{:})+0.03];
+        v_ylim = [0 max(hd_subs.hspeed{:})+0.03];
         v_xrange = range(v_xlim);
         v_yrange = range(v_ylim);
         g(2,2) = gramm('x',hd_subs.hpos_xy_2D_1(2)','y',hd_subs.hspeed);
