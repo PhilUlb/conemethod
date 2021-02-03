@@ -8,10 +8,16 @@ addpath(genpath(pwd))
 
 %% Experiment 1 analyses and figures
 
-% Run only once (results are automatically stored)
+% Only needs to be run once (results will be stored).
+% Results that are needed for the scripts below are already stored in
+% Exp1_data.mat.
 Exp1_apply_cone_method
 Exp1_apply_CP_test
-Exp1_actual_adjustment_angle_estimation % includes Supplementary Figure 3-1 & 3-2
+
+% Includes Supplementary Figures 3-1 & 3-2; estimated actual adjustment
+% angles already included in Exp1_data.mat (i.e. only needs to be run for
+% the figure)
+Exp1_actual_adjustment_angle_estimation
 
 % Run each time
 Exp1_Figure1D
