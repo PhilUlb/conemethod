@@ -1,7 +1,3 @@
-clear all
-load('Exp1_data.mat')
-
-
 %% Determination of Experiment 1's "opposite" target for overshoot control
 
 
@@ -16,8 +12,10 @@ all_tgt_pos.target_direction = mod(all_tgt_pos.target_direction+180,360);
 trial_data = innerjoin(trial_data,all_tgt_pos);
 
 trial_data.GroupCount = [];
-trial_data.Properties.VariableNames('unique_target_xyz_pos')     = {'target_opposite_xyz_pos'};
-trial_data.Properties.VariableNames('unique_target_xy_pos_2D_1') = {'target_opposite_xy_pos_2D_1'};
+try % try statement in case this script is rerun on data where variables have already been renamed
+    trial_data.Properties.VariableNames('unique_target_xyz_pos')     = {'target_opposite_xyz_pos'};
+    trial_data.Properties.VariableNames('unique_target_xy_pos_2D_1') = {'target_opposite_xy_pos_2D_1'};
+end
 
 trial_data = sortrows(trial_data,'index');
 
@@ -206,7 +204,7 @@ trial_data.poc2D_vel_toolate  = cone_data.poc2D_vel_toolate;
 %% Store the data
 
 cone_data = cone_data(:,sort(cone_data.Properties.VariableNames));
-save('Exp1_cone_data.mat','cone_data');
+save([data_dir 'Exp1_cone_data.mat'],'cone_data');
 
 trial_data = trial_data(:,sort(trial_data.Properties.VariableNames));
-save('Exp1_data.mat','-append','trial_data');
+save([data_dir 'Exp1_data_full.mat'],'-append','trial_data');

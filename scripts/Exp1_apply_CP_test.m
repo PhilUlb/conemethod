@@ -1,7 +1,3 @@
-clear all
-load('Exp1_data.mat')
-
-
 %% Trajectory interpolation
 
 % To apply the CP test, the distance-from-start values of all trajectories
@@ -95,5 +91,5 @@ trial_data.poc_cp_orig_rel2invia   = trial_data.poc_cp_orig-trial_data.in_via_p;
 
 trial_data = trial_data(:,sort(trial_data.Properties.VariableNames));
 
-save('Exp1_CP_data.mat','CP_data');
-save('Exp1_data.mat','-append','trial_data');
+save([data_dir 'Exp1_CP_data.mat'],'CP_data');
+save([data_dir 'Exp1_data_full.mat'],'-append','trial_data');

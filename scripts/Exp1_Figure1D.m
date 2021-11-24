@@ -1,7 +1,3 @@
-clear all
-load('Exp1_data.mat')
-
-
 %% Figure 1D
 
 % Color map
@@ -127,4 +123,4 @@ g(4).set_color_options('map',[49,130,189]./255);
 g(4).draw();
 
 
-g.export('file_name','Figure_1D.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_1D.pdf','file_type','pdf');

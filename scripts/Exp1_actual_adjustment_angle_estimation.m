@@ -1,7 +1,3 @@
-clear all
-load('Exp1_data.mat')
-
-
 clr_map_dir = [166,206,227
                 31,120,180
                178,223,138
@@ -249,7 +245,7 @@ for i = 1:length(sel_ind)
         end
     end
     
-    g.export('file_name',['FigS3-1_idx' num2str(sel_ind(i)) '.pdf'],'file_type','pdf');
+    g.export('export_path',fig_dir,'file_name',['Figure_S3-1_idx' num2str(sel_ind(i)) '.pdf'],'file_type','pdf');
 end
 
 
@@ -268,7 +264,7 @@ g.set_names('x','Nominal adjustment angle [°]','y','Actual adjustment angle [°]'
 g.set_text_options('base_size',14);
 g.draw();
 
-g.export('file_name','Figure_S3-2A.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S3-2A.pdf','file_type','pdf');
 
 
 %% Supplementary Figure 3-2 BC
@@ -318,11 +314,11 @@ g.set_text_options('base_size',14);
 g.set_stat_options('nboot',2000);
 g.set_color_options('map',clr_map_dir2);
 g.draw();
-g.export('file_name','FigS3-2BC.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S3-2BC.pdf','file_type','pdf');
 
 
 %% Store the actual adjustment angle + bin
 
 trial_data = trial_data(:,sort(trial_data.Properties.VariableNames));
-save('Exp1_data.mat','-append','trial_data');
+save([data_dir 'Exp1_data_full.mat'],'-append','trial_data');
 
