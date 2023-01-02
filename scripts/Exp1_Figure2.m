@@ -1,6 +1,4 @@
-clear all
-load('Exp1_data.mat')
-load('Exp1_cone_data.mat')
+load([data_dir 'Exp1_cone_data.mat'])
 
 %%
 
@@ -196,6 +194,6 @@ for i = 1:length(selind) % Set up to plot multiple trials
         end
     end
     
-    g.export('file_name','Figure_2.pdf','file_type','pdf');
+    g.export('export_path',fig_dir,'file_name','Figure_2.pdf','file_type','pdf');
 end
 

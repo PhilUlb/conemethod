@@ -1,7 +1,3 @@
-clear all
-load('Exp1_data.mat')
-
-
 %% Data preparation
 
 trial_data.poc_cone_cp_diff = trial_data.poc3D_vel - trial_data.poc_cp_orig;
@@ -163,7 +159,7 @@ g(1,2).set_color_options('map',[49,131,189;0 0 0]./255);
 g(1,2).set_line_options('base_size',2,'styles',{'-'});
 g(1,2).draw();
 
-g.export('file_name','Figure_4DEF.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_4DEF.pdf','file_type','pdf');
 
 
 %% T-tests (Figure 4F) 
@@ -229,4 +225,4 @@ g.set_point_options('base_size',8);
 g.set_text_options('base_size',12,'title_scaling',1.1667,'label_scaling',1.1667);
 g.draw();
 
-g.export('file_name','Figure_S5-2.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S5-2.pdf','file_type','pdf');

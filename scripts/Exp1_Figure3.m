@@ -1,6 +1,5 @@
-clear all
-load('Exp1_data.mat')
-load('Exp1_cone_data.mat')
+load([data_dir 'Exp1_cone_data.mat'])
+
 
 
 %% Figure 3A
@@ -107,7 +106,7 @@ g(2).stat_boxplot();
 g(2).set_color_options('map',[0.6 0.6 0.6]);
 g(2).draw();
 
-g.export('file_name','Figure_3A.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_3A.pdf','file_type','pdf');
 
 
 %% Figure 3B
@@ -219,7 +218,7 @@ for i = 1:height(td_subs)
     g(ri,ci).draw();
 end
 
-g.export('file_name','Figure_3B.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_3B.pdf','file_type','pdf');
 
 
 %% Figure 3C
@@ -249,4 +248,4 @@ g.set_text_options('base_size',14,'facet_scaling',0.9,'legend_title_scaling',0.9
 g.set_line_options('base_size',3);
 g.draw();
 
-g.export('file_name','Figure_3C.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_3C.pdf','file_type','pdf');

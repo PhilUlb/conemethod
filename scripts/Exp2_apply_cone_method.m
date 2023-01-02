@@ -1,7 +1,3 @@
-clear all
-load('Exp2_data.mat')
-
-
 %% Where needed, we reformat variables for use with the cone method's wrapper function
 % See also "Exp1_apply_cone_method.m"
 
@@ -54,7 +50,7 @@ trial_data.toc2D_vel_pre_soa = trial_data.toc2D_vel_rel2soa<50;
 %% Store the data
 
 cone_data = cone_data(:,sort(cone_data.Properties.VariableNames));
-save('Exp2_cone_data.mat','cone_data');
+save([data_dir 'Exp2_cone_data.mat'],'cone_data');
 
 trial_data = trial_data(:,sort(trial_data.Properties.VariableNames));
-save('Exp2_data.mat','-append','trial_data');
+save([data_dir 'Exp2_data.mat'],'-append','trial_data');

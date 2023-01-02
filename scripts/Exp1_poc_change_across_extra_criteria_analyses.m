@@ -1,7 +1,3 @@
-clear all
-load('Exp1_data.mat')
-
-
 %% Data preparation
 
 % Identify for which trials the POC estimates differ between cone method additions/versions ("affected trials")
@@ -189,7 +185,7 @@ g(1).stat_summary('type','bootci','geom',{'line','point','errorbar'},'width',1.7
 g(1).set_color_options('map',[49,130,189]./255);
 g(1).draw();
 
-g.export('file_name','Figure_S1-2.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S1-2.pdf','file_type','pdf');
 
 
 %% Supplementary Figure 5-3
@@ -276,6 +272,6 @@ g.set_line_options('base_size',2);
 g.set_stat_options('nboot',2000);
 g.draw();
 
-g.export('file_name','Figure_S5-3.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S5-3.pdf','file_type','pdf');
 
 

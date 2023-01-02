@@ -1,7 +1,3 @@
-clear all
-load('Exp1_data.mat')
-
-
 %% Data preparation
 
 trial_data2 = stack(trial_data,...
@@ -277,7 +273,7 @@ g.set_line_options('base_size',2,'styles',{'-'});
 g.set_stat_options('nboot',2000);
 g.draw();
 
-g.export('file_name','Figure_4ABC.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_4ABC.pdf','file_type','pdf');
 
 
 %% Supplementary Figure 1-1 A
@@ -314,7 +310,7 @@ g.set_color_options('map',cmap_outofbounds);
 g.set_line_options('base_size',2);
 g.set_stat_options('nboot',2000);
 g.draw();
-g.export('file_name','Figure_S1-1A.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S1-1A.pdf','file_type','pdf');
 
 
 
@@ -353,7 +349,7 @@ g.set_line_options('base_size',2);
 g.set_stat_options('nboot',2000);
 g.set_order_options('x',[2 5 3 4 1]);
 g.draw();
-g.export('file_name','Figure_S1-1B.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S1-1B.pdf','file_type','pdf');
 
 
 %% Wilcoxon signed rank tests for Supplementary Figure 1-1 B
@@ -424,7 +420,7 @@ g.set_line_options('base_size',2);
 g.set_text_options('base_size',10,'label_scaling',1.4,'facet_scaling',1.4,'legend_scaling',1);
 g.set_stat_options('nboot',2000);
 g.draw();
-g.export('file_name','Figure_S5-1A.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S5-1A.pdf','file_type','pdf');
 
 
 %% Supplementary Figure 5-1 B
@@ -469,7 +465,7 @@ g.set_stat_options('nboot',2000);
 g.set_order_options('x',[2 5 3 4 1]);
 g.draw();
 
-g.export('file_name','Figure_S5-1B.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_S5-1B.pdf','file_type','pdf');
 
 
 %% Wilcoxon signed rank tests for Supplementary Figure 5-1 B

@@ -1,7 +1,3 @@
-clear all
-load('Exp2_data.mat')
-
-
 %% Data preparation
 
 
@@ -126,7 +122,7 @@ g.set_color_options('map',[82,82,82;49,130,189]./255);
 g.no_legend();
 g.set_text_options('base_size',14,'facet_scaling',1,'legend_scaling',0.9,'legend_title_scaling',0.9);
 g.draw();
-g.export('file_name','Figure_5A.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_5A.pdf','file_type','pdf');
 
 
 % Figure 5 BCD
@@ -202,5 +198,5 @@ for i = 2:3
     g(i).set_point_options('base_size',6);
     g(i).draw();
 end
-g.export('file_name','Figure_5BCD.pdf','file_type','pdf');
+g.export('export_path',fig_dir,'file_name','Figure_5BCD.pdf','file_type','pdf');
 

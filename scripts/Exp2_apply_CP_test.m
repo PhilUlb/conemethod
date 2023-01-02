@@ -1,7 +1,3 @@
-clear all
-load('Exp2_data.mat')
-
-
 %% Trajectory interpolation
 
 % To apply the CP test, the distance-from-start values of all trajectories
@@ -120,6 +116,5 @@ trial_data.toc_cp_orig_rel2gocue = trial_data.toc_cp_orig + trial_data.reaction_
 
 trial_data = trial_data(:,sort(trial_data.Properties.VariableNames));
 
-save('Exp2_CP_data.mat','CP_data');
-save('Exp2_data.mat','-append','trial_data');
-save('Exp2_data.mat','-append','trial_data');
+save([data_dir 'Exp2_CP_data.mat'],'CP_data');
+save([data_dir 'Exp2_data.mat'],'-append','trial_data');
